@@ -27,7 +27,7 @@ permanent), edit this file / `preferences.md` / the script, then `git commit` an
 - **地点库** (places_db) — one page per place, icon = emoji. Fields: 名称, 类型 (餐馆/咖啡馆/酒吧/
   观景台/景点/博物馆/购物/甜品/演出/节日活动/其他), 区域 (中城 Midtown, 下东区 LES, 东村/西村 Village,
   SoHo/翠贝卡, 熨斗区 Flatiron/NoMad, 下城 Lower Manhattan, 切尔西 Chelsea, 上东区 UES, 上西区 UWS,
-  哈莱姆 Harlem, 布鲁克林 Brooklyn, 皇后区 Queens, 泽西市 Jersey City, 霍博肯 Hoboken, 其他),
+  哈莱姆 Harlem, 布朗克斯 Bronx, 布鲁克林 Brooklyn, 皇后区 Queens, 泽西市 Jersey City, 霍博肯 Hoboken, 其他),
   地址, Google Maps链接, 状态 (想去/本周计划/已去/放弃), 计划周次, 优先级 (必去/想去/有空再去),
   最佳时段 (multi), **需要预约** (需要/建议预约/不需要/不接受预约), **预约链接**,
   **排队情况** (不用排/10–30 分钟/30–60 分钟/1 小时以上/看时段), 预算 ($–$$$$), 营业时间备注,
