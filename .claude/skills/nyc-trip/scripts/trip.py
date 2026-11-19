@@ -112,9 +112,12 @@ def ensure_options(places):
     db = api("GET", f"databases/{CFG['places_db']}")
     patch = {}
     for k in FIELDS_SELECT:
-        have = {o["name"] for o in db["properties"][k]["select"]["options"]}
+        opts = db["properties"][k]["select"]["options"]
+        have = {o["name"] for o in opts}
         new = sorted({p[k] for p in places if p.get(k) and p[k] not in have})
-        if new: patch[k] = {"select": {"options": [{"name": n} for n in new]}}
+        # Notion replaces the whole option list: resend existing options or they get deleted
+        if new: patch[k] = {"select": {"options": [{"id": o["id"], "name": o["name"], "color": o["color"]} for o in opts]
+                                                  + [{"name": n} for n in new]}}
     if patch: api("PATCH", f"databases/{CFG['places_db']}", {"properties": patch})
 
 def maps_link(p):
