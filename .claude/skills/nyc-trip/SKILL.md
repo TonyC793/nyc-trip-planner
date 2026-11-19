@@ -25,7 +25,7 @@ permanent), edit this file / `preferences.md` / the script, then `git commit` an
 
 ## Notion structure
 - **地点库** (places_db) — one page per place, icon = emoji. Fields: 名称, 类型 (餐馆/咖啡馆/酒吧/
-  观景台/景点/博物馆/购物/甜品/演出/节日活动/其他), 区域 (中城 Midtown, 下东区 LES, 东村/西村 Village,
+  观景台/景点/博物馆/购物/甜品/演出/节日活动/建筑/其他), 区域 (中城 Midtown, 下东区 LES, 东村/西村 Village,
   SoHo/翠贝卡, 熨斗区 Flatiron/NoMad, 下城 Lower Manhattan, 切尔西 Chelsea, 上东区 UES, 上西区 UWS,
   哈莱姆 Harlem, 上曼哈顿 Upper Manhattan, 剧院区 Theater District, 中央公园 Central Park, 唐人街 Chinatown, 布朗克斯 Bronx,
   布鲁克林 Brooklyn, 皇后区 Queens, 泽西市 Jersey City, 霍博肯 Hoboken, 威霍肯 Weehawken, 其他),
