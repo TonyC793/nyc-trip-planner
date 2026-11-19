@@ -27,7 +27,7 @@ permanent), edit this file / `preferences.md` / the script, then `git commit` an
 - **地点库** (places_db) — one page per place, icon = emoji. Fields: 名称, 类型 (餐馆/咖啡馆/酒吧/
   观景台/景点/博物馆/购物/甜品/演出/节日活动/其他), 区域 (中城 Midtown, 下东区 LES, 东村/西村 Village,
   SoHo/翠贝卡, 熨斗区 Flatiron/NoMad, 下城 Lower Manhattan, 切尔西 Chelsea, 上东区 UES, 上西区 UWS,
-  哈莱姆 Harlem, 上曼哈顿 Upper Manhattan, 中央公园 Central Park, 唐人街 Chinatown, 布朗克斯 Bronx,
+  哈莱姆 Harlem, 上曼哈顿 Upper Manhattan, 剧院区 Theater District, 中央公园 Central Park, 唐人街 Chinatown, 布朗克斯 Bronx,
   布鲁克林 Brooklyn, 皇后区 Queens, 泽西市 Jersey City, 霍博肯 Hoboken, 威霍肯 Weehawken, 其他),
   地址, Google Maps链接, 状态 (想去/本周计划/已去/放弃), 计划周次, 优先级 (必去/想去/有空再去),
   最佳时段 (multi), **需要预约** (需要/建议预约/不需要/不接受预约), **预约链接**,
@@ -71,7 +71,7 @@ permanent), edit this file / `preferences.md` / the script, then `git commit` an
    (mid-Dec ≈16:30, early Jan ≈16:40), and for every restaurant/bar **reservation need + link and
    expected wait at the planned time**. Waits drive the schedule: walk-in-only hot spots go at
    opening time or off-peak; add a backup nearby. Sources + check date go in `notes`.
-3. Plan: 1–2 neighbouring 区域 per day; rooftops/观景台 at sunset; ≤6 stops; respect hours;
+3. Plan: 1–2 neighbouring 区域 per day; rooftops/观景台 at sunset; Broadway shows in the evening (remind to enter the lottery 1–2 days before, with backup rush); ≤6 stops; respect hours;
    legs >~20 min walk → subway (line + stations, `leg.mode: "transit"`).
 4. `trip.py day day.json` per day. Spec:
    ```json
@@ -109,7 +109,11 @@ Always apply `preferences.md` when planning.
    trip window that aren't already in 地点库 or 活动推荐 (`trip.py recs`): new and viral
    openings/articles, seasonal events (holiday markets, light shows, Rockefeller tree, NYE events,
    ice rinks), shows/exhibits, themed bar nights incl. LGBTQ+/gay bars (drag shows, holiday
-   parties, NYE), food events. Prefer recent sources (Time Out NY, Secret NYC, Eater NY, The
+   parties, NYE), food events, **art**: museum/gallery exhibitions on during the trip, auction-house
+   previews, concerts (Carnegie Hall, Lincoln Center, NY Phil, Met Opera), jazz clubs, dance,
+   experimental theatre, talks; and **Broadway**: new shows/closings and lottery/rush changes
+   (wareontheglobe.com/broadway-lottery-rush-list, playbill.com). Broadway shows go in 地点库 as
+   类型 演出, 区域 剧院区 Theater District, lottery link in 预约链接, platform/price in 我的备注. Prefer recent sources (Time Out NY, Secret NYC, Eater NY, The
    Infatuation, Instagram-viral coverage, venue sites).
 2. Pick the 5–8 best, each with real dates within 2026-12-12 – 2027-01-11 when possible.
    `trip.py rec-add recs.json` (fields: 名称, emoji, 类型, 活动时间, 活动日期, 地点, 区域, 链接, 简介).
