@@ -12,6 +12,9 @@ Subcommands
   update FILE.json  Patch existing places: [{"id": ..., <fields>}].
   days              List 每日行程 rows (date, weekday, week, id, filled?).
   day FILE.json     Write one day's itinerary page (see SKILL.md).
+  recs [待定|✅ 加入|❌ 不要]   List 活动推荐 rows (optionally by 决定).
+  rec-add FILE.json           Add recommendations; skips ones already listed.
+  rec-update FILE.json        Patch recommendations: [{"id": ..., <fields>}].
 """
 import csv, io, json, os, re, sys, time, unicodedata, urllib.parse, urllib.request, zipfile
 
@@ -21,7 +24,8 @@ H = {"Notion-Version": CFG["notion_version"], "Content-Type": "application/json"
 
 TYPE_EMOJI = {"餐馆": "🍽️", "咖啡馆": "☕", "酒吧": "🍸", "观景台": "🌆", "景点": "🏛️", "博物馆": "🖼️",
               "购物": "🛍️", "甜品": "🍰", "演出": "🎭", "其他": "📍"}
-FIELDS_SELECT = ["类型", "区域", "状态", "计划周次", "优先级", "需要预约", "预算", "去过后评分"]
+FIELDS_SELECT = ["类型", "区域", "状态", "计划周次", "优先级", "需要预约", "预算", "去过后评分", "排队情况"]
+FIELDS_URL = ["Google Maps链接", "预约链接", "来源"]
 FIELDS_TEXT = ["地址", "营业时间备注", "我的备注"]
 
 # ---------------- Notion ----------------
@@ -95,7 +99,8 @@ def props_from(p):
         if k in p: out[k] = {"select": {"name": p[k]} if p[k] else None}
     for k in FIELDS_TEXT:
         if k in p: out[k] = rt(p[k] or "")
-    if "Google Maps链接" in p: out["Google Maps链接"] = {"url": p["Google Maps链接"] or None}
+    for k in FIELDS_URL:
+        if k in p: out[k] = {"url": p[k] or None}
     if "最佳时段" in p: out["最佳时段"] = {"multi_select": [{"name": x} for x in p["最佳时段"]]}
     return out
 
@@ -245,10 +250,49 @@ def cmd_day(path):
                 api("PATCH", f"pages/{s['place_id']}", {"properties": {"计划周次": {"select": {"name": week}}}})
     print(json.dumps({"day_page": did, "url": "https://www.notion.so/" + did.replace("-", ""), "stops": len(stops)}, ensure_ascii=False))
 
+# ---------------- 活动推荐 ----------------
+REC_SELECT = ["类型", "区域", "决定"]; REC_TEXT = ["活动时间", "地点", "简介"]
+
+def rec_props(p):
+    out = {}
+    if "名称" in p: out["名称"] = {"title": [{"text": {"content": p["名称"]}}]}
+    for k in REC_SELECT:
+        if k in p: out[k] = {"select": {"name": p[k]} if p[k] else None}
+    for k in REC_TEXT:
+        if k in p: out[k] = rt(p[k] or "")
+    if "链接" in p: out["链接"] = {"url": p["链接"] or None}
+    if "推荐日期" in p: out["推荐日期"] = {"date": {"start": p["推荐日期"]}}
+    if "已加入地点库" in p: out["已加入地点库"] = {"checkbox": bool(p["已加入地点库"])}
+    return out
+
+def rec_rows(decision=None):
+    body = {"filter": {"property": "决定", "select": {"equals": decision}}} if decision else None
+    out = []
+    for r in query_all(CFG["recs_db"], body):
+        d = {k: v for k, v in ((k, txt(v)) for k, v in r["properties"].items()) if v not in (None, "", [])}
+        d["id"] = r["id"]; out.append(d)
+    return out
+
+def cmd_rec_add(path):
+    have = rec_rows()
+    for p in json.load(open(path)):
+        if any((p.get("链接") and p["链接"] == r.get("链接")) or norm(p["名称"]) == norm(r.get("名称")) for r in have):
+            print("skip (already recommended):", p["名称"]); continue
+        p.setdefault("决定", "待定"); p.setdefault("推荐日期", time.strftime("%Y-%m-%d"))
+        pg = api("POST", "pages", {"parent": {"database_id": CFG["recs_db"]},
+                                    "icon": {"type": "emoji", "emoji": p.get("emoji", "✨")}, "properties": rec_props(p)})
+        have.append(p); print("added", p["名称"], pg["id"])
+
+def cmd_rec_update(path):
+    for p in json.load(open(path)):
+        api("PATCH", f"pages/{p['id']}", {"properties": rec_props(p)}); print("updated", p["id"])
+
 if __name__ == "__main__":
     a = sys.argv[1:]
     cmds = {"places": lambda: print(json.dumps(place_rows(), ensure_ascii=False)),
             "takeout": lambda: cmd_takeout(a[1]), "add": lambda: cmd_add(a[1]), "update": lambda: cmd_update(a[1]),
-            "days": cmd_days, "day": lambda: cmd_day(a[1])}
+            "days": cmd_days, "day": lambda: cmd_day(a[1]),
+            "recs": lambda: print(json.dumps(rec_rows(a[1] if len(a) > 1 else None), ensure_ascii=False)),
+            "rec-add": lambda: cmd_rec_add(a[1]), "rec-update": lambda: cmd_rec_update(a[1])}
     if not a or a[0] not in cmds: sys.exit(__doc__)
     cmds[a[0]]()
