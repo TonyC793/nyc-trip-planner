@@ -25,16 +25,18 @@ permanent), edit this file / `preferences.md` / the script, then `git commit` an
 
 ## Notion structure
 - **地点库** (places_db) — one page per place, icon = emoji. Fields: 名称, 类型 (餐馆/咖啡馆/酒吧/
-  观景台/景点/博物馆/购物/甜品/演出/其他), 区域 (中城 Midtown, 下东区 LES, 东村/西村 Village,
+  观景台/景点/博物馆/购物/甜品/演出/节日活动/其他), 区域 (中城 Midtown, 下东区 LES, 东村/西村 Village,
   SoHo/翠贝卡, 熨斗区 Flatiron/NoMad, 下城 Lower Manhattan, 切尔西 Chelsea, 上东区 UES, 上西区 UWS,
   哈莱姆 Harlem, 布鲁克林 Brooklyn, 皇后区 Queens, 泽西市 Jersey City, 霍博肯 Hoboken, 其他),
   地址, Google Maps链接, 状态 (想去/本周计划/已去/放弃), 计划周次, 优先级 (必去/想去/有空再去),
   最佳时段 (multi), **需要预约** (需要/建议预约/不需要/不接受预约), **预约链接**,
   **排队情况** (不用排/10–30 分钟/30–60 分钟/1 小时以上/看时段), 预算 ($–$$$$), 营业时间备注,
-  我的备注, **来源** (article/link it came from), 去过后评分.
+  我的备注, **来源** (article/link it came from), **活动日期** (Notion date; for anything that only
+  happens on certain dates — pass `{"start": "2026-12-24"}` or `{"start": …, "end": …}`; put the
+  daily time window in 营业时间备注; mark last-year/unconfirmed dates with ⚠️ in 我的备注), 去过后评分.
   The user filters by 区域 and 类型, so always fill both.
-- **活动推荐** (recs_db) — daily report items: 名称, 类型, 活动时间, 地点, 区域, 链接, 简介,
-  推荐日期, 决定 (待定/✅ 加入/❌ 不要), 已加入地点库.
+- **活动推荐** (recs_db) — daily report items: 名称, 类型, 活动时间 (text), 活动日期 (date range),
+  地点, 区域, 链接, 简介, 推荐日期, 决定 (待定/✅ 加入/❌ 不要), 已加入地点库.
 - **每周计划**, **每日行程** — weeks 第1周 12/12–13 … 第6周 1/11; one row per date.
 
 ## A — add places (the main job until shortly before the trip)
@@ -62,7 +64,7 @@ permanent), edit this file / `preferences.md` / the script, then `git commit` an
 ## B — plan days (only when asked, usually close to the trip)
 
 1. `trip.py places`, `trip.py days`, and read `preferences.md`. Candidates: what the user names,
-   then 状态 本周计划 / 计划周次, then 必去, then the rest — and ✅ items from 活动推荐 with dates.
+   then anything whose 活动日期 covers that day (fixed-date events first), then 状态 本周计划 / 计划周次, then 必去, then the rest — and ✅ items from 活动推荐 with dates.
 2. Look up for the actual date(s) and put on the page: opening hours that day (holidays 12/24,
    12/25, 12/31, 1/1; Mondays), weather (only ≤7 days out, otherwise "出发前一周再查"), sunset
    (mid-Dec ≈16:30, early Jan ≈16:40), and for every restaurant/bar **reservation need + link and
@@ -109,9 +111,10 @@ Always apply `preferences.md` when planning.
    parties, NYE), food events. Prefer recent sources (Time Out NY, Secret NYC, Eater NY, The
    Infatuation, Instagram-viral coverage, venue sites).
 2. Pick the 5–8 best, each with real dates within 2026-12-12 – 2027-01-11 when possible.
-   `trip.py rec-add recs.json` (fields: 名称, emoji, 类型, 活动时间, 地点, 区域, 链接, 简介).
+   `trip.py rec-add recs.json` (fields: 名称, emoji, 类型, 活动时间, 活动日期, 地点, 区域, 链接, 简介).
 3. Also: rows marked ✅ 加入 with 已加入地点库 unchecked → add to 地点库 (Workflow A; put the
-   date in 我的备注 / 营业时间备注) and tick 已加入地点库. Ignore ❌.
+   类型 节日活动 for seasonal events; copy 活动日期; times in 营业时间备注; 链接 → 来源 and, if it
+   sells tickets, 预约链接) and tick 已加入地点库 via `trip.py rec-update`. Ignore ❌.
 4. Report in Chinese: numbered list (emoji, name, when, where, why, link), then "回复编号即可
    加入地点库，或在 Notion「活动推荐」里把决定改成 ✅ 加入". If the user replies with numbers,
    mark those ✅ and add them.

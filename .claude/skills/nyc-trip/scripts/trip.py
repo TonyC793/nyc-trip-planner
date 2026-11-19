@@ -58,7 +58,9 @@ def txt(p):
     if t == "select": return (p["select"] or {}).get("name")
     if t == "multi_select": return [x["name"] for x in p["multi_select"]]
     if t in ("url", "checkbox"): return p[t]
-    if t == "date": return (p["date"] or {}).get("start")
+    if t == "date":
+        d = p["date"] or {}
+        return d.get("start") if not d.get("end") else f"{d['start']} → {d['end']}"
     return None
 
 def place_rows():
@@ -101,6 +103,7 @@ def props_from(p):
         if k in p: out[k] = rt(p[k] or "")
     for k in FIELDS_URL:
         if k in p: out[k] = {"url": p[k] or None}
+    if "活动日期" in p: out["活动日期"] = {"date": p["活动日期"] or None}  # {"start": "2026-12-24", "end": optional}
     if "最佳时段" in p: out["最佳时段"] = {"multi_select": [{"name": x} for x in p["最佳时段"]]}
     return out
 
@@ -261,6 +264,7 @@ def rec_props(p):
     for k in REC_TEXT:
         if k in p: out[k] = rt(p[k] or "")
     if "链接" in p: out["链接"] = {"url": p["链接"] or None}
+    if "活动日期" in p: out["活动日期"] = {"date": p["活动日期"] or None}
     if "推荐日期" in p: out["推荐日期"] = {"date": {"start": p["推荐日期"]}}
     if "已加入地点库" in p: out["已加入地点库"] = {"checkbox": bool(p["已加入地点库"])}
     return out
