@@ -21,6 +21,9 @@ import csv, io, json, os, re, sys, time, unicodedata, urllib.parse, urllib.reque
 HERE = os.path.dirname(os.path.abspath(__file__))
 CFG = json.load(open(os.path.join(HERE, "..", "config.json")))
 H = {"Notion-Version": CFG["notion_version"], "Content-Type": "application/json"}
+# Local use: set NOTION_TOKEN on your own computer. In the cloud the proxy injects it instead.
+if os.environ.get("NOTION_TOKEN"):
+    H["Authorization"] = "Bearer " + os.environ["NOTION_TOKEN"]
 
 TYPE_EMOJI = {"餐馆": "🍽️", "咖啡馆": "☕", "酒吧": "🍸", "观景台": "🌆", "景点": "🏛️", "博物馆": "🖼️",
               "购物": "🛍️", "甜品": "🍰", "演出": "🎭", "其他": "📍"}

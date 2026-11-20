@@ -15,7 +15,8 @@ what they've told you after past days. It overrides the defaults below.
 **Keep it cheap**: no images/covers/maps; emoji only. Navigation = Google Maps links built by the
 script. Web search only where this file says. Don't paste JSON or script output into chat.
 
-**Auth**: no token in this repo. The environment's proxy injects the Notion token for
+**Auth**: no token in this repo. On the user's own computer the script reads the `NOTION_TOKEN`
+environment variable (never print it or write it to a file in the repo); in the cloud (Default environment) the proxy injects it. The environment's proxy injects the Notion token for
 `api.notion.com`; it only sees the「纽约旅行」page. On 401/403 tell the user the session must
 run on the Default environment (which holds the Notion secret) and stop.
 
