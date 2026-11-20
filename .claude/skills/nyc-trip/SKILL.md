@@ -105,7 +105,7 @@ Always apply `preferences.md` when planning.
 
 ## D — daily events report (scheduled run, 19:00 PST)
 
-1. Read `preferences.md`. Web search (keep it to ~6–10 searches) for NYC things relevant to the
+1. Read `preferences.md`. Web search (keep it to ~8–14 searches: most for events, a few for vetted places — step 3) for NYC things relevant to the
    trip window that aren't already in 地点库 or 活动推荐 (`trip.py recs`): new and viral
    openings/articles, seasonal events (holiday markets, light shows, Rockefeller tree, NYE events,
    ice rinks), shows/exhibits, themed bar nights incl. LGBTQ+/gay bars (drag shows, holiday
@@ -117,9 +117,26 @@ Always apply `preferences.md` when planning.
    Infatuation, Instagram-viral coverage, venue sites).
 2. Pick the 5–8 best, each with real dates within 2026-12-12 – 2027-01-11 when possible.
    `trip.py rec-add recs.json` (fields: 名称, emoji, 类型, 活动时间, 活动日期, 地点, 区域, 链接, 简介).
-3. Also: rows marked ✅ 加入 with 已加入地点库 unchecked → add to 地点库 (Workflow A; put the
+3. **Grow 地点库 a little every day (quality over quantity).** Events are the main part of the
+   report, but also add ~2–5 permanent places straight to 地点库 (Workflow A), rotating through
+   the 类型 that are thinnest (`trip.py places`, count by 类型/区域) — 餐馆, 咖啡馆, 甜品, 酒吧,
+   观景台, 景点, 购物, 建筑, 博物馆 … Bar for inclusion: **proven by time and by crowds**, not
+   hype. A place qualifies only if it has several independent signals, e.g. a long track record
+   (open ≥1 year, or a classic), repeated appearance across editorial lists (Eater 38, NYT,
+   Infatuation, Time Out, Michelin/Bib Gourmand, New Yorker), and consistently strong real-user
+   reviews (Google/Yelp, Reddit r/FoodNYC & r/AskNYC, 小红书 / Instagram posts from ordinary
+   visitors, not just influencers). Reject paid/sponsored posts, PR launch pieces, "#ad" content,
+   places that are only viral this month, and tourist traps. Brand-new openings go to 活动推荐
+   (as 美食, with the caveat) rather than straight into 地点库, unless they already have broad
+   independent praise. Search widely: Eater NY, The Infatuation, Time Out NY, Secret NYC, NYT,
+   New York Magazine/Grub Street, Resy Hit List, Michelin, Reddit, Instagram, 小红书. In 我的备注
+   say why it's trusted (e.g. "Eater 38 常驻 + Reddit 高赞，开了 15 年"). If unsure → skip.
+4. Also: rows marked ✅ 加入 with 已加入地点库 unchecked → add to 地点库 (Workflow A; put the
    类型 节日活动 for seasonal events; copy 活动日期; times in 营业时间备注; 链接 → 来源 and, if it
    sells tickets, 预约链接) and tick 已加入地点库 via `trip.py rec-update`. Ignore ❌.
-4. Report in Chinese: numbered list (emoji, name, when, where, why, link), then "回复编号即可
-   加入地点库，或在 Notion「活动推荐」里把决定改成 ✅ 加入". If the user replies with numbers,
+   A museum exhibition whose museum is already in 地点库 → append it to that museum's 我的备注
+   (name + dates) instead of a new row; a gallery not yet in 地点库 → new 博物馆 row.
+5. Report in Chinese: numbered list of events (emoji, name, when, where, why, link), then
+   "回复编号即可加入地点库，或在 Notion「活动推荐」里把决定改成 ✅ 加入"; then a short line listing the
+   places added to 地点库 today and why they're trustworthy. If the user replies with numbers,
    mark those ✅ and add them.
