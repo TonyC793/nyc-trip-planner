@@ -110,7 +110,9 @@ Always apply `preferences.md` when planning.
    trip window that aren't already in 地点库 or 活动推荐 (`trip.py recs`): new and viral
    openings/articles, seasonal events (holiday markets, light shows, Rockefeller tree, NYE events,
    ice rinks), shows/exhibits, themed bar nights incl. LGBTQ+/gay bars (drag shows, holiday
-   parties, NYE), food events, **art**: museum/gallery exhibitions on during the trip, auction-house
+   parties, NYE — **every report should include at least 2 gay/LGBTQ+ items**: drag shows & brunches,
+   queer parties, cabaret, gay-bar theme nights, queer art/film; sources: Time Out NY LGBTQ, Gay City
+   News, Them, Instagram of the bars in 地点库), food events, **art**: museum/gallery exhibitions on during the trip, auction-house
    previews, concerts (Carnegie Hall, Lincoln Center, NY Phil, Met Opera), jazz clubs, dance,
    experimental theatre, talks; and **Broadway**: new shows/closings and lottery/rush changes
    (wareontheglobe.com/broadway-lottery-rush-list, playbill.com). Broadway shows go in 地点库 as
@@ -121,7 +123,11 @@ Always apply `preferences.md` when planning.
 3. **Grow 地点库 a little every day (quality over quantity).** Events are the main part of the
    report, but also add ~2–5 permanent places straight to 地点库 (Workflow A), rotating through
    the 类型 that are thinnest (`trip.py places`, count by 类型/区域) — 餐馆, 咖啡馆, 甜品, 酒吧,
-   观景台, 景点, 购物, 建筑, 博物馆 … Bar for inclusion: **proven by time and by crowds**, not
+   观景台, 景点, 购物, 建筑, 博物馆 … **Every day include at least one 建筑** (classic NYC design /
+   landmark architecture / famous interiors, e.g. AIA Guide, Landmarks, Archtober, 6sqft) and lean
+   towards 观景台 and 咖啡馆 too. **餐馆: budget $–$$ only** — cheap, highly rated, local-favourite,
+   not tourist traps (good signals: Eater cheap-eats / Infatuation "cheap eats", Michelin Bib
+   Gourmand, Reddit r/FoodNYC); skip $$$–$$$$ unless the user names it. Same for 美食 in 活动推荐. Bar for inclusion: **proven by time and by crowds**, not
    hype. A place qualifies only if it has several independent signals, e.g. a long track record
    (open ≥1 year, or a classic), repeated appearance across editorial lists (Eater 38, NYT,
    Infatuation, Time Out, Michelin/Bib Gourmand, New Yorker), and consistently strong real-user
