@@ -109,15 +109,22 @@ Always apply `preferences.md` when planning.
 1. Read `preferences.md`. Web search (keep it to ~8–14 searches: most for events, a few for vetted places — step 3) for NYC things relevant to the
    trip window that aren't already in 地点库 or 活动推荐 (`trip.py recs`): new and viral
    openings/articles, seasonal events (holiday markets, light shows, Rockefeller tree, NYE events,
-   ice rinks), shows/exhibits, themed bar nights incl. LGBTQ+/gay bars (drag shows, holiday
-   parties, NYE — **every report should include at least 2 gay/LGBTQ+ items**: drag shows & brunches,
-   queer parties, cabaret, gay-bar theme nights, queer art/film; sources: Time Out NY LGBTQ, Gay City
+   ice rinks), shows/exhibits, themed bar nights incl. LGBTQ+/gay bars (holiday
+   parties, NYE — **every report should include at least 2 gay/LGBTQ+ items**: queer parties,
+   gay-bar theme nights, holiday/NYE parties, queer art/film; **no drag-queen events** (no drag
+   shows, drag brunches or drag versions of shows — the user dislikes them); sources: Time Out NY LGBTQ, Gay City
    News, Them, Instagram of the bars in 地点库), food events, **art**: museum/gallery exhibitions on during the trip, auction-house
    previews, concerts (Carnegie Hall, Lincoln Center, NY Phil, Met Opera), jazz clubs, dance,
    experimental theatre, talks; and **Broadway**: new shows/closings and lottery/rush changes
    (wareontheglobe.com/broadway-lottery-rush-list, playbill.com). Broadway shows go in 地点库 as
    类型 演出, 区域 剧院区 Theater District, lottery link in 预约链接, platform/price in 我的备注. Prefer recent sources (Time Out NY, Secret NYC, Eater NY, The
    Infatuation, Instagram-viral coverage, venue sites).
+   **Search platforms directly, not only via search-engine snippets** (the environment allows all
+   sites): open and read listing pages with WebFetch / the web-fetch agent / curl — e.g. Time Out
+   NY & Secret NYC calendars, Eventbrite, Resident Advisor (ra.co), Dice, Partiful/Shotgun, Fever,
+   Gay City News, Them, venue & bar Instagram pages, Reddit (r/nyc, r/AskNYC, r/FoodNYC,
+   r/gaynyc — use old.reddit.com or `.json`), 小红书 (xiaohongshu.com search), Playbill,
+   BroadwayWorld, museum/gallery sites. If a site blocks automated access, note it and move on.
 2. Pick the 5–8 best, each with real dates within 2026-12-12 – 2027-01-11 when possible.
    `trip.py rec-add recs.json` (fields: 名称, emoji, 类型, 活动时间, 活动日期, 地点, 区域, 链接, 简介).
 3. **Grow 地点库 a little every day (quality over quantity).** Events are the main part of the
